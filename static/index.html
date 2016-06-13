@@ -1,22 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  </head>
-  <body>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12" ng-controller="MonController as monCtrl">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+    crossorigin="anonymous">
+  <style>
+    .strike {
+      text-decoration: line-through
+    }
+  </style>
+</head>
 
-          <h1>{{monCtrl.message}} {{ monCtrl.user.name }}</h1>
-          <input ng-model="monCtrl.user.name" class="form-control" type="text">
+<body>
 
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" ng-controller="MonController as monCtrl">
+
+        <h1>{{monCtrl.message}} {{ monCtrl.user.name }}</h1>
+        <h1 ng-bind=monCtrl.message ></h1>
+        <input ng-model="monCtrl.user.name" class="form-control" type="text">
+        <input ng-model="pass" class="form-control" type="text">
+        <div ng-show="monCtrl.password===pass">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea nisi hic natus dolor nihil iusto omnis ipsam, at labore
+          quisquam excepturi. Officia alias, sed aperiam, officiis eius asperiores. Voluptatem, itaque.</div>
+
+        <input ng-model="monCtrl.password2" class="form-control" type="text">
+
+        <div ng-if="monCtrl.isPassOk()">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea nisi hic natus dolor nihil iusto omnis ipsam, at labore
+          quisquam excepturi. Officia alias, sed aperiam, officiis eius asperiores. Voluptatem, itaque.</div>
+        <ul class='list-group'>
+          <li ng-repeat="friend in monCtrl.friends track by $index" class="list-group-item">
+            {{ $index + 1 }} - {{ friend.name }}<button ng-click="monCtrl.clickmeDelUser($index)" class="pull-right">&times;</button>
+          </li>
+        </ul>
+        <ul class='list-group'>
+          <li ng-repeat="user in monCtrl.friends track by $index" class="list-group-item " ng-class="{strike : user.deleted}">
+            {{ $index + 1 }} - {{ user.name }}<button ng-click="monCtrl.clickmeDelUser2($index)" class="pull-right">&times;</button>
+          </li>
+        </ul>
+
+        <div>
+          <input ng-model="addUser"  type="text"><button ng-click="monCtrl.clickmeuser(addUser)" class="btn btn-primary ">add user</button>
         </div>
+        <div>
+          <button class="btn btn-primary" ng-click="monCtrl.template='one.html'">ONE</button>
+          <button class="btn btn-primary" ng-click="monCtrl.template='two.html'">TWO</button>
+          <ng-include ng-if = "monCtrl.template" src="monCtrl.template"></ng-include>
+        </div>
+
       </div>
     </div>
+  </div>
 
 
-    <script src="build.js"></script>
-  </body>
+  <script src="build.js"></script>
+</body>
+
 </html>
