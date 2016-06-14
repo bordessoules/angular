@@ -48,7 +48,13 @@ export class Pizza {
     this.toppings = this.toppings.filter(filtre)
     return this
   }
-
+ toppingsToString(){
+   let retour =""
+    this.toppings.forEach(function (element) {
+      retour = retour + element
+    })
+   return retour
+ }
   toString (lang = 'en') {
     var chaine = ''
     const uniqueArray = this.toppings.reduce(function (accu, item, index, array) {

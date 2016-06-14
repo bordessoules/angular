@@ -24,7 +24,8 @@ export class ListPizza {
     return this.db.pizzas.update(pizzaId, pizzaModification)
   }
   getPizzas () {
-    return this.db.pizzas.toArray()
+    var temp = this.db.pizzas.toArray()
+    return temp
   }
 
   filtre (topping) {

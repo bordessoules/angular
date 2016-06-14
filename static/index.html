@@ -7,12 +7,12 @@
 
     <div class="container" style="margin-top:3em">
       <div class="row">
-        <div class="col-md-12" ng-controller="PizzaController as ctrl">
+        <div class="col-md-12" ng-controller="PizzaListController as ctrl">
         </div>
       </div>
     </div>
     <h1>Bonjour !!!!</h1>
-    <input id="value_addPizza" type="texte" /><button id="addPizza">Ajout pizza</button><br />
+    <input id="value_addPizza" type="texte" /><button id="addPizza" <button id="addPizza" ng-click="ctrl.addPizzaClick(value_addPizza)">Ajout pizza</button><br />
     <div id="toppings">
     </div>
     <button id="enregistrer">enregistrer</button>
@@ -21,11 +21,15 @@
         <thead>
           <tr>
             <th>Nom pizza</th>
-            <th>Ingredients</th>
-            <th>Cuisson</th>
-            <th>supprimer</th>
+            <th>Ingredients </th>
+            <th>Cuisson </th>
+            <th>supprimer </th>
           </tr>
         </thead>
+        <tr class='list-group' ng-repeat="pizza in ctrl.pizzas.getPizzas() track by $index" class="list-group-item " ng-class="{strike : user.deleted}">
+            <td>{{ $index + 1 }} - {{ pizza.name | uppercase }}</td> <td ng-repeat = "top in pizza track by $index"> {top}</td> <button ng-click="monCtrl.clickmeDelUser2($index)" class="pull-right">&times;</button>
+          </li>
+        </tr>
       </table>
     </div>
 
