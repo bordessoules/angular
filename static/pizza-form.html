@@ -1,0 +1,23 @@
+<div ng-controller="PizzaController as $ctrl">
+    <form name="pizzaForm" ng-submit="$ctrl.savePizza(pizzaForm)" novalidate>
+
+        <label for="name">Nom :</label>
+        <input required ng-model="$ctrl.pizza.name" name="name" type="text" id="name">
+        <p class="text-danger" ng-if="pizzaForm.name.$invalid && pizzaForm.name.$touched">Nom obligatoire</p>
+        <br>
+        <span ng-repeat="topping in $ctrl.toppings ">
+        <label >{{topping}}
+            <input type="checkbox" value="topping" name="topping" ng-model=" $ctrl.pizza.toppings[topping]" />           
+        </label>
+        </span>
+         <pre>{{$ctrl.pizza | json }}</pre>
+        <br>
+        <label for="email">Email :</label>
+        <input ng-model="$ctrl.pizza.email" name="email" type="email" id="emailname">
+
+        <button type="submit">save</button>
+       <a ng-click="$ctrl.pizza.toppings=$ctrl.pizza.topping.key">save</a></th>
+        <pre>{{ pizzaForm.name.$error.required | json }}</pre>
+
+    </form>
+</div>

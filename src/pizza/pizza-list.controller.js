@@ -10,7 +10,7 @@ export class PizzaListController {
       new Pizza({ name: 'trois', status: 'not cooked', toppings: ['eggs', 'eggs', 'mushrooms'] }),
       new Pizza({ name: 'quatre', status: 0 }),
       new Pizza({ name: 'cinq', status: 'not cooked' })
-    ].map(pizza=>{
+    ].map(pizza=>{ // transformation de la liste en vuie de l'affichage
         pizza._toppings = pizza.toppings2string()
         pizza._toppingsLength = (pizza.toppings || []).length
         return pizza
