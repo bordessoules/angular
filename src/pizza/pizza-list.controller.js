@@ -1,4 +1,4 @@
-import { Pizza } from './pizza'
+import { Pizza } from './Pizza'
 
 export class PizzaListController {
   constructor ($timeout) {
