@@ -6,14 +6,14 @@
         <thead>
             <tr>
                 <th><a ng-click="$ctrl.predicate='name';reverse=!reverse">Nom</a></th>
-                <th><a ng-click="$ctrl.predicate='toppings';reverse=!reverse">Ingrédients</a></th>
+                <th><a ng-click="$ctrl.predicate='_toppingsLength';reverse=!reverse">Ingrédients</a></th>
                 <th><a ng-click="$ctrl.predicate='status';reverse=!reverse">Statut</a></th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="pizza in $ctrl.pizzas | orderBy:$ctrl.sortPizzas():reverse | filter:$ctrl.keep() track by $index">
+            <tr ng-repeat="pizza in $ctrl.pizzas | orderBy:$ctrl.predicate:reverse | filter:$ctrl.keep() track by $index">
                 <td>{{ pizza.name }}</td>
-                <td>{{ pizza | pizzaToppings }}</td>
+                <td>{{ pizza._toppings }}</td>
                 <td>
                     <button ng-click="$ctrl.cookPizza(pizza)" ng-if="!pizza.status" class="btn">cook me</button>
                     <span ng-if="pizza.status">CUITE</span>

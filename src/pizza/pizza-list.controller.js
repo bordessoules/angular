@@ -10,7 +10,11 @@ export class PizzaListController {
       new Pizza({ name: 'trois', status: 'not cooked', toppings: ['eggs', 'eggs', 'mushrooms'] }),
       new Pizza({ name: 'quatre', status: 0 }),
       new Pizza({ name: 'cinq', status: 'not cooked' })
-    ]
+    ].map(pizza=>{
+        pizza._toppings = pizza.toppings2string()
+        pizza._toppingsLength = (pizza.toppings || []).length
+        return pizza
+    })
   }
 
   addPizza (pizzaName = 'new pizza') {
@@ -39,6 +43,7 @@ export class PizzaListController {
         || (pizza.toppings || []).join('').indexOf(this.query) !== -1
     }.bind(this)
   }
+  /*
   sortPizzas () {
     return function (pizza) {
       if (this.predicate === 'name' || this.predicate === 'status') {
@@ -49,5 +54,5 @@ export class PizzaListController {
       }
       return 1
     }.bind(this)
-  }
+  }*/
 }
