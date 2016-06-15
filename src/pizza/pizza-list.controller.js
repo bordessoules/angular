@@ -1,42 +1,57 @@
 import { Pizza } from './Pizza'
 
 export class PizzaListController {
-  constructor ($timeout) {
+  constructor ($timeout, PizzaService) {
+    
     this.$timeout = $timeout
+    this.PizzaService = PizzaService
+    //console.log('PizzaService', PizzaService.getPizzas())
+    PizzaService.getPizzas()
+      .then(pizzas => {
+        this.pizzas = this.initPizzas(pizzas)
+      })
 
-    this.pizzas = [
-      new Pizza({ name: 'un', status: 0, toppings: ['eggs', 'mushrooms'] }),
-      new Pizza({ name: 'deux', status: 'not cooked', toppings: [] }),
-      new Pizza({ name: 'trois', status: 'not cooked', toppings: ['eggs', 'eggs', 'mushrooms'] }),
-      new Pizza({ name: 'quatre', status: 0 }),
-      new Pizza({ name: 'cinq', status: 'not cooked' })
-    ].map(pizza=>{ // transformation de la liste en vuie de l'affichage
+  }
+  initPizzas(pizzas) {
+    return pizzas
+      .map(pizza => {
         pizza._toppings = pizza.toppings2string()
         pizza._toppingsLength = (pizza.toppings || []).length
         return pizza
+      })
+  }
+  addPizza(pizzaName = 'new pizza') {
+    console.log(this.PizzaService)
+    let pizza = new Pizza({
+      name: pizzaName,
+      toppings: ['eggs']
     })
+
+    this.PizzaService.addPizza(pizza).then((pizzas) => {
+      this.pizzas = this.initPizzas(pizzas)
+
+    })
+      .catch(err => {
+        window.alert('Pb lors de l\'ajout de la pizza')
+      })
+    //   name: pizzaName
+    // })
   }
 
-  addPizza (pizzaName = 'new pizza') {
-    this.pizzas.push({
-      name: pizzaName
-    })
-  }
-
-  cookPizza (pizza) {
+  cookPizza(pizza) {
     return this.$timeout(() => {
       pizza.status = 1
     }, 3000)
   }
 
-  cookPizzas () {
+  cookPizzas() {
     const pizza = this.pizzas.find(p => p.status === 0)
     if (!pizza) return
     this.cookPizza(pizza)
       .then(this.cookPizzas.bind(this))
   }
 
-  keep () {
+  keep() {
     return function (pizza) {
       if (!this.query) return true
       return pizza.name.indexOf(this.query) !== -1
@@ -55,4 +70,6 @@ export class PizzaListController {
       return 1
     }.bind(this)
   }*/
+
 }
+PizzaListController.$inject = ['$timeout', 'PizzaService']
