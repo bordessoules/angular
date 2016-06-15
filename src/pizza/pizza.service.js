@@ -38,7 +38,7 @@ let toppings = null
 
 
 export class PizzaService {
-  constructor ($timeout, $http) {
+  constructor ($timeout, $http, $q) {
     this.$timeout = $timeout
     this.$http = $http
     this.$q = $q
