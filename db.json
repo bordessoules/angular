@@ -21,6 +21,14 @@
         "eggs"
       ],
       "id": 6
+    },
+    {
+      "id": 7,
+      "name": "new pizza",
+      "toppings": [
+        "eggs"
+      ],
+      "status": 1
     }
   ]
 }

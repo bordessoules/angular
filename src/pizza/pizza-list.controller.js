@@ -38,8 +38,6 @@ export class PizzaListController {
       .catch(err => {
         window.alert('Pb lors de l\'ajout de la pizza')
       })
-    //   name: pizzaName
-    // })
   }
 delPizza(pizza) {
       console.log(pizza)    
