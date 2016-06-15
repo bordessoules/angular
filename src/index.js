@@ -22,7 +22,10 @@ angular.module('dtang', [
 
       .when('/about', {
         template: '<h1>ABOUT</h1>',
-        controller: function () { }
+        controllerAs: 'ctrl',
+        controller: function () {
+          this.title = 'DTA'
+        }
       })
 
       .when('/pizza/:id', {

@@ -32,11 +32,16 @@ var pizzas = [
 ]
 */
 const url = 'http://localhost:1337/pizzas'
+const urlToppings = 'http://localhost:1337/toppings'
+
+let toppings = null
+
 
 export class PizzaService {
   constructor ($timeout, $http) {
     this.$timeout = $timeout
     this.$http = $http
+    this.$q = $q
   }
 
   getPizzas () {
@@ -58,7 +63,6 @@ export class PizzaService {
     })
   }
  putPizza(pizza) {
-        console.log('pizza id : ',pizza)
         return this.$http.put('http://localhost:1337/pizzas/'+pizza.id, {
             id: pizza.id,
             name: pizza.name,
@@ -68,7 +72,6 @@ export class PizzaService {
             return this.getPizzas()
         })
     }
-
   addPizza (pizza) {
     return this.$http.post(
       url,
@@ -77,7 +80,19 @@ export class PizzaService {
       return this.getPizzas()
     })
   }
+
+  getToppings () {
+    if (this.toppings) {
+      return this.$q.resolve(this.toppings)
+    } else {
+      return this.$http.get(urlToppings)
+        .then(response => {
+          this.toppings = response.data
+          return this.toppings
+        })
+    }
+  }
 }
 
-PizzaService.$inject = ['$timeout', '$http']// on inject le timeout et le http
+PizzaService.$inject = ['$timeout', '$http', '$q']// on inject le timeout et le http
 //*/

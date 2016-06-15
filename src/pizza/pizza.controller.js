@@ -1,5 +1,5 @@
 export class PizzaController {
-  constructor (PizzaService, $routeParams, $location) {
+  constructor(PizzaService, $routeParams, $location) {
     this.PizzaService = PizzaService
     this.$location = $location
 
@@ -7,9 +7,13 @@ export class PizzaController {
       .then(pizza => {
         this.pizza = pizza
       })
+    this.PizzaService.getToppings()
+      .then(toppings => {
+        this.toppings = toppings
+      })
   }
 
-  savePizza (form) {
+  savePizza(form) {
     if (form.$invalid) return
     this.PizzaService.savePizza(this.pizza)
       .then(() => {

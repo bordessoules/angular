@@ -1,35 +1,32 @@
 <style>
-  input.ng-invalid.ng-touched {
-    background: indianred
-  }
-  label {
-    display: block
-  }
+    input.ng-invalid.ng-touched {
+        background: indianred
+    }
+    
+    label {
+        display: block
+    }
 </style>
 
 <h3>Édition pizza</h3>
 
-<form name="pizzaForm"
-  ng-submit="$ctrl.savePizza(pizzaForm)"
-  novalidate>
+<form name="pizzaForm" ng-submit="$ctrl.savePizza(pizzaForm)" novalidate>
 
-  <div class="form-group">
+    <div class="form-group">
 
-    <label for="name">Nom :</label>
-    <input
-      ng-model-options="{ updateOn : 'blur' }"
-      ng-model="$ctrl.pizza.name"
-      required
-      name="name"
-      type="text"
-      class="form-control"
-      id="name">
-    <p class="text-danger" ng-if="pizzaForm.name.$invalid && pizzaForm.name.$touched">Nom obligatoire</p>
+        <label for="name">Nom :</label>
+        <input ng-model-options="{ updateOn : 'blur' }" ng-model="$ctrl.pizza.name" required name="name" type="text" class="form-control"
+            id="name">
+        <p class="text-danger" ng-if="pizzaForm.name.$invalid && pizzaForm.name.$touched">Nom obligatoire</p>
++        <span ng-repeat="topping in $ctrl.getToppings ">
+         <label >{{topping}}
++            <input type="checkbox" value="topping" name="topping" ng-model=" $ctrl.pizza.toppings[topping]" />           
+         </label>
+         </span>
+    </div>
 
-  </div>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
 
-  <button type="submit" class="btn btn-primary">Enregistrer</button>
-
-  <button ng-click="$ctrl.cancel()" type="button" class="btn">Annuler</button>
+    <button ng-click="$ctrl.cancel()" type="button" class="btn">Annuler</button>
 
 </form>
