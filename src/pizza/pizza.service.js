@@ -31,36 +31,33 @@ var pizzas = [
     new Pizza({ name: 'cinq', status: 1 })
 ]
 */
-export class PizzaService {
-    constructor($timeout, $http) {
-        this.$timeout = $timeout
-        this.$http = $http
-    }
+const url = 'http://localhost:1337/pizzas'
 
-    getPizzas() {
-        return this.$http({ // ou en utilisant un helper http : this.$http.get('http://localhost:1337/pizzas')
-            url: 'http://localhost:1337/pizzas',
-            method: 'GET'
-        }).then(response => {
-            return response.data
-        })
-            .then(pizzas => pizzas.map(pizzaJson => new Pizza(pizzaJson))) // on converti les objet recuperer par http en pizza
-    }
-    addPizza(pizza) {
-        return this.$http.post('http://localhost:1337/pizzas', {
-            name: pizza.name,
-            toppings: pizza.toppings,
-            status: pizza.status
-        }).then(response => {
-            return this.getPizzas()
-        })
-        /* return this.$timeout(1000)
-             .then(() => {
-                 pizzas.push(pizza)
-                 return pizzas
-             })*/
-    }
-    putPizza(pizza) {
+export class PizzaService {
+  constructor ($timeout, $http) {
+    this.$timeout = $timeout
+    this.$http = $http
+  }
+
+  getPizzas () {
+    return this.$http.get(url)
+      .then(({data: pizzas}) => pizzas.map(pizzaJson => new Pizza(pizzaJson)))
+  }
+
+  getPizza (id) {
+    return this.$http.get(url + '/' + id)
+      .then(response => response.data)
+  }
+
+  savePizza (pizza) {
+    return this.$http.put(url + '/' + pizza.id, pizza)
+  }
+  deletePizza (pizza) {
+    return this.$http.delete(url + '/' + pizza.id).then(response => {
+      return this.getPizzas()
+    })
+  }
+ putPizza(pizza) {
         console.log('pizza id : ',pizza)
         return this.$http.put('http://localhost:1337/pizzas/'+pizza.id, {
             id: pizza.id,
@@ -71,16 +68,16 @@ export class PizzaService {
             return this.getPizzas()
         })
     }
-     deletePizza(pizza) {
-        return this.$http.delete('http://localhost:1337/pizzas/'+pizza.id, {
-            id: pizza.id,
-            name: pizza.name,
-            toppings: pizza.toppings,
-            status: pizza.status
-        }).then(response => {
-            return this.getPizzas()
-        })
-    }
+
+  addPizza (pizza) {
+    return this.$http.post(
+      url,
+      pizza // ou pizza.json() si besoin
+    ).then(response => {
+      return this.getPizzas()
+    })
+  }
 }
-PizzaService.$inject = ['$timeout', '$http'] // on inject le timeout et le http
+
+PizzaService.$inject = ['$timeout', '$http']// on inject le timeout et le http
 //*/

@@ -1,37 +1,52 @@
-<div ng-controller="PizzaListController as $ctrl">
+<div>
 
-    <input ng-model="$ctrl.query" type="text" class="form-control">
-    <div ng-if="!$ctrl.pizzas">
-        <img src="gears.gif">
+    <div ng-if="!$ctrl.pizza">
+
+        <h3>Liste des pizzas</h3>
+
+        <div style="text-align:center" ng-if="!$ctrl.pizzas">
+            <img src="gears.gif">
+        </div>
+     
+        <div ng-if="$ctrl.pizzas">
+
+            <input placeholder="Rechercher ..." ng-model="$ctrl.query" type="text" class="form-control">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><a ng-click="$ctrl.predicate='name';reverse=!reverse">Nom</a></th>
+                        <th><a ng-click="$ctrl.predicate='_toppingsLength';reverse=!reverse">Ingrédients</a></th>
+                        <th><a ng-click="$ctrl.predicate='status';reverse=!reverse">Statut</a></th>
+                        <th>Suppression</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="pizza in $ctrl.pizzas | orderBy:$ctrl.predicate:reverse | filter:$ctrl.keep() track by $index">
+                        <td><a href="#/pizza/{{ pizza.id }}">{{ pizza.name }}</a></td>
+                        <td>{{ pizza._toppings }}</td>
+                        <td>
+                            <button ng-click="$ctrl.cookPizza(pizza)" ng-if="!pizza.status" class="btn">cook me</button>
+                            <span ng-if="pizza.status">CUITE</span>
+                        </td>
+                        <td>
+                            <button ng-click="$ctrl.delPizza(pizza)" class="btn">delete me</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button ng-click="$ctrl.addPizza()" class="btn btn-primary">
+        Nouvelle Pizza
+      </button>
+            <button ng-click="$ctrl.cookPizzas()" class="btn">Cuire toutes les pizzas</button>
+
+        </div>
+
     </div>
 
-    <table ng-if="$ctrl.pizzas" class="table">
-        <thead>
-            <tr>
-                <th><a ng-click="$ctrl.predicate='name';reverse=!reverse">Nom</a></th>
-                <th><a ng-click="$ctrl.predicate='_toppingsLength';reverse=!reverse">Ingrédients</a></th>
-                <th><a ng-click="$ctrl.predicate='status';reverse=!reverse">Statut</a></th>
-                <th>Suppression</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="pizza in $ctrl.pizzas | orderBy:$ctrl.predicate:reverse | filter:$ctrl.keep() track by $index">
-                <td>{{ pizza.name }}</td>
-                <td>{{ pizza._toppings }}</td>
-                <td>
-                    <button ng-click="$ctrl.cookPizza(pizza)" ng-if="!pizza.status" class="btn">cook me</button>
-                    <span ng-if="pizza.status">CUITE</span>
-                </td>
-                <td>
-                    <button ng-click="$ctrl.delPizza(pizza)"  class="btn">delete me</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-     <input ng-model="pizzaName" class="form-control" type="text"/>
-    <button ng-click="$ctrl.addPizza(pizzaName)" class="btn btn-primary">
-    Nouvelle Pizza
-  </button>
-    <button ng-click="$ctrl.cookPizzas()" class="btn">Cuire toutes les pizzas</button>
+    <div ng-if="$ctrl.pizza">
+        <ng-include src="'pizza-form.html'"></ng-include>
+    </div>
 
 </div>

@@ -10,6 +10,9 @@ export class PizzaListController {
       .then(pizzas => {
         this.pizzas = this.initPizzas(pizzas)
       })
+       // tri par défaut
+    this.predicate = 'name'
+
 
   }
   initPizzas(pizzas) {

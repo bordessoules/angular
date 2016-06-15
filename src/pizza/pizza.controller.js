@@ -1,29 +1,21 @@
-import { Pizza } from './Pizza'
-
 export class PizzaController {
-  constructor () {
-    this.pizza = {
-      name: ''
-    }
-    this.pizza2 = new Pizza('')
-    this.toppings =[
-        'tomato_sauce',
-        'mozzarella',
-        'mushrooms',
-        'ham',
-        'eggs',
-        'artichoke',
-        'green_olives',
-        'onion',
-        'sweet_corn',
-        'green_peppers',
-        'black_olives',
-        'peas',
-        'salami'
-        ]
-  }
- savePizza () {
-    console.log('save', this.pizza)
+  constructor (PizzaService, $routeParams, $location) {
+    this.PizzaService = PizzaService
+    this.$location = $location
+
+    this.PizzaService.getPizza($routeParams.id)
+      .then(pizza => {
+        this.pizza = pizza
+      })
   }
 
+  savePizza (form) {
+    if (form.$invalid) return
+    this.PizzaService.savePizza(this.pizza)
+      .then(() => {
+        this.$location.path('/')
+      })
+  }
 }
+
+PizzaController.$inject = ['PizzaService', '$routeParams', '$location']
