@@ -15,6 +15,7 @@ export class PizzaListController {
   initPizzas(pizzas) {
     return pizzas
       .map(pizza => {
+        pizza._id = pizza.id
         pizza._toppings = pizza.toppings2string()
         pizza._toppingsLength = (pizza.toppings || []).length
         return pizza
@@ -37,11 +38,27 @@ export class PizzaListController {
     //   name: pizzaName
     // })
   }
+delPizza(pizza) {
+      console.log(pizza)    
+
+      return this.PizzaService.deletePizza(pizza).then((pizzas) => {
+      this.pizzas = this.initPizzas(pizzas)
+
+    }).catch(err => {
+        window.alert('Pb lors de la supression la pizza')
+      })
+  }
 
   cookPizza(pizza) {
-    return this.$timeout(() => {
       pizza.status = 1
-    }, 3000)
+      console.log(pizza)    
+
+      return this.PizzaService.putPizza(pizza).then((pizzas) => {
+      this.pizzas = this.initPizzas(pizzas)
+
+    }).catch(err => {
+        window.alert('Pb lors de la cuissonde la pizza')
+      })
   }
 
   cookPizzas() {

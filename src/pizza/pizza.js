@@ -1,5 +1,6 @@
 export class Pizza {
-  constructor ({name, toppings, status}) {
+  constructor ({name, toppings, status,id=-1}) {
+    this.id = id
     this.name = name
     this.toppings = toppings
     this.status = status

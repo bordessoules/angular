@@ -11,6 +11,7 @@
                 <th><a ng-click="$ctrl.predicate='name';reverse=!reverse">Nom</a></th>
                 <th><a ng-click="$ctrl.predicate='_toppingsLength';reverse=!reverse">Ingrédients</a></th>
                 <th><a ng-click="$ctrl.predicate='status';reverse=!reverse">Statut</a></th>
+                <th>Suppression</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,9 @@
                 <td>
                     <button ng-click="$ctrl.cookPizza(pizza)" ng-if="!pizza.status" class="btn">cook me</button>
                     <span ng-if="pizza.status">CUITE</span>
+                </td>
+                <td>
+                    <button ng-click="$ctrl.delPizza(pizza)"  class="btn">delete me</button>
                 </td>
             </tr>
         </tbody>
