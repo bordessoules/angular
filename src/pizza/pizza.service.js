@@ -51,7 +51,7 @@ export class PizzaService {
 
   getPizza (id) {
     return this.$http.get(url + '/' + id)
-      .then(response => response.data)
+      .then(response => new Pizza(response.data))
   }
 
   savePizza (pizza) {

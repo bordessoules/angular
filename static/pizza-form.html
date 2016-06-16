@@ -1,7 +1,8 @@
 <style>
     input.ng-invalid.ng-touched {
         background: indianred
-    }    
+    }
+    
     label {
         display: block
     }
@@ -17,11 +18,11 @@
         <input ng-model-options="{ updateOn : 'blur' }" ng-model="$ctrl.pizza.name" required name="name" type="text" class="form-control"
             id="name">
         <p class="text-danger" ng-if="pizzaForm.name.$invalid && pizzaForm.name.$touched">Nom obligatoire</p>
-+        <span ng-repeat="(key, value) in $ctrl.toppings ">
-         <label >{{value.fr || key}}
-+            <input type="checkbox" value="topping" name="topping" ng-model=" $ctrl.pizza.toppings[topping]" />           
-         </label>
-         </span>
+        <pizza-toppings 
+        toppings="$ctrl.pizza.toppings" 
+        dipos="$ctrl.toppings" 
+        on-add-topping="$ctrl.addTopping($event)"></pizza-toppings>         <!--on-add-topping du pizzacontroller-->
+
     </div>
 
     <button type="submit" class="btn btn-primary">Enregistrer</button>

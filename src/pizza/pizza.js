@@ -5,7 +5,14 @@ export class Pizza {
     this.toppings = toppings
     this.status = status
   }
+  addTopping (topping) {
+    // 2 identical toppings max
+    if (this.toppings.filter(t => t === topping).length > 1) return this
 
+    this.toppings.push(topping)
+
+    return this
+  }
   toppings2string (pizza) {
     if (!this.toppings) return ''
     return this.toppings

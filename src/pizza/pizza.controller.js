@@ -12,7 +12,9 @@ export class PizzaController {
         this.toppings = toppings
       })
   }
-
+ addTopping ({ topping }) {
+    this.pizza.addTopping(topping)
+  }
   savePizza(form) {
     if (form.$invalid) return
     this.PizzaService.savePizza(this.pizza)
