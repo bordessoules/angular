@@ -1,7 +1,7 @@
 import angular from 'angular'
 import ngRoute from 'angular-route'
 import PizzaModule from './pizza'
-import dragndrop from './dragndrop/dragdrop.js'
+import dragndrop from './dragndrop'
 console.log(PizzaModule)
 
 angular.module('dtang', [
