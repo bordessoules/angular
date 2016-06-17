@@ -16,6 +16,7 @@ export default
     .service('PizzaService', PizzaService) // si PizzaService est une classe cf pizza.service
     //    .factory("PizzaService", PizzaService)  // si PizzaService est une fonction cf pizza.service
     .component('pizzaToppings', PizzaToppingsComponent)
+    /*
     .directive('dtaDrag', function () {
       return {
         scope: { dtaDrag: '&' },
@@ -48,5 +49,5 @@ export default
           }, false)
         }
       }
-    })
+    })*/
     .name

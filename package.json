@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "json": "json-server db.json --port 1337",
-    "start": "budo src/index.js:build.js --dir static --host localhost --open --live -- -t babelify"
+    "start": "budo src/index.js:build.js --dir static --host localhost --open --live -- -t babelify",
+    "build": "browserify -t babelify src/index.js --outfile static/build.js"
+
   },
   "author": "",
   "license": "ISC",

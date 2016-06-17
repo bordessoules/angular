@@ -8,7 +8,7 @@ export const PizzaToppingsComponent={
     },
     controller: PizzaToppingsComponentController,
     template : `<div>
-                <div class="col-xs-6" dta-drop="$ctrl.dropped()">
+                <div class="col-xs-6" my-drop="$ctrl.dropped()">
                     <h4>toppings</h4>
                     <ul class="list-group">
                         <li class="list-group-item"
@@ -19,9 +19,11 @@ export const PizzaToppingsComponent={
                     <h4>toppings dipos</h4>
                     <ul class="list-group">
                         <li class="list-group-item" 
-                        draggable = true
-                            dta-drag="$ctrl.draggedTopping = key"
-                        ng-repeat="(key,value) in $ctrl.dipos" ><a href ng-click="$ctrl.addTopping(key)">{{key}}</a></li>
+                            draggable = true
+                            my-drag="$ctrl.draggedTopping = key"
+                            ng-repeat="(key,value) in $ctrl.dipos" >
+                                <a href ng-click="$ctrl.addTopping(key)">{{key}}</a>
+                        </li>
                     </ul>
                 </div>
                 </div>

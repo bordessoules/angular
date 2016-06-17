@@ -17,9 +17,11 @@
     },
     {
       "id": 5,
-      "name": 3,
+      "name": "test",
       "toppings": [
-        "eggs"
+        "eggs",
+        "mozzarella",
+        "mushrooms"
       ],
       "status": 1
     },
