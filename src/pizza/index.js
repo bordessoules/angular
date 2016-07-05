@@ -4,6 +4,7 @@ import { pizzaToppingsFilter } from './pizza-toppings.filter'
 import { PizzaController } from './pizza.controller'
 import {PizzaService} from './pizza.service.js'
 import { PizzaToppingsComponent } from './pizzaToppings.component.js'
+import { PizzaEditorComponent } from './pizzaEditor.component.js'
 
 export default
 
@@ -15,6 +16,7 @@ export default
 
     .service('PizzaService', PizzaService) // si PizzaService est une classe cf pizza.service
     //    .factory("PizzaService", PizzaService)  // si PizzaService est une fonction cf pizza.service
+    .component('pizzaEditor', PizzaEditorComponent)
     .component('pizzaToppings', PizzaToppingsComponent)
     /*
     .directive('dtaDrag', function () {

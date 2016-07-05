@@ -7,7 +7,7 @@
         <div style="text-align:center" ng-if="!$ctrl.pizzas">
             <img src="gears.gif">
         </div>
-     
+
         <div ng-if="$ctrl.pizzas">
 
             <input placeholder="Rechercher ..." ng-model="$ctrl.query" type="text" class="form-control">
@@ -36,9 +36,7 @@
                 </tbody>
             </table>
 
-            <button ng-click="$ctrl.addPizza()" class="btn btn-primary">
-        Nouvelle Pizza
-      </button>
+            <button ng-click="$ctrl.newPizza()" class="btn btn-primary">Nouvelle Pizza</button>
             <button ng-click="$ctrl.cookPizzas()" class="btn">Cuire toutes les pizzas</button>
 
         </div>

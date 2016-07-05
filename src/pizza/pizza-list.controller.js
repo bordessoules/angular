@@ -1,17 +1,17 @@
 import { Pizza } from './Pizza'
 
 export class PizzaListController {
-  constructor ($timeout, PizzaService) {
-    
+  constructor($timeout, PizzaService,$location) {
+    this.$location = $location
     this.$timeout = $timeout
     this.PizzaService = PizzaService
-    this.getPizzas()   
-       // tri par défaut
+    this.getPizzas()
+    // tri par défaut
     this.predicate = 'name'
 
 
   }
-   getPizzas () {
+  getPizzas() {
     return this.PizzaService.getPizzas()
       .then(pizzas => {
         this.pizzas = this.initPizzas(pizzas)
@@ -27,10 +27,9 @@ export class PizzaListController {
       })
   }
   addPizza(pizzaName = 'new pizza') {
-    console.log(this.PizzaService)
     let pizza = new Pizza({
       name: pizzaName,
-      toppings: ['eggs']
+      toppings: []
     })
 
     this.PizzaService.addPizza(pizza).then((pizzas) => {
@@ -41,21 +40,33 @@ export class PizzaListController {
         window.alert('Pb lors de l\'ajout de la pizza')
       })
   }
-delPizza(pizza) {
-      console.log(pizza)    
+  newPizza(pizzaName = 'new pizza') {
+    let pizza = new Pizza({
+      name: pizzaName,
+      toppings: []
+    })
+    
+    this.PizzaService.newPizza(pizza).then((pizza) => {
+        console.log(pizza.id)
+        this.$location.path('/pizzas'+pizza.id)
+    })
+      .catch(err => {
+        window.alert('Pb lors de l\'ajout de la pizza')
+      })
+  }
+  delPizza(pizza) {
+    console.log(pizza)
 
-      return this.PizzaService.deletePizza(pizza).then((pizzas) => {
+    return this.PizzaService.deletePizza(pizza).then((pizzas) => {
       this.pizzas = this.initPizzas(pizzas)
 
     }).catch(err => {
-        window.alert('Pb lors de la supression la pizza')
-      })
+      window.alert('Pb lors de la supression la pizza')
+    })
   }
 
-  cookPizza(pizza) {
+  cookPizza(pizza) {    
       pizza.status = 1
-      console.log(pizza)    
-
       return this.PizzaService.putPizza(pizza).then((pizzas) => {
       this.pizzas = this.initPizzas(pizzas)
 
@@ -92,4 +103,4 @@ delPizza(pizza) {
   }*/
 
 }
-PizzaListController.$inject = ['$timeout', 'PizzaService']
+PizzaListController.$inject = ['$timeout', 'PizzaService','$location']

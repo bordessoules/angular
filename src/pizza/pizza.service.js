@@ -76,11 +76,18 @@ export class PizzaService {
     return this.$http.post(
       url,
       pizza // ou pizza.json() si besoin
-    ).then(response => {
+    ).then(response => {      
       return this.getPizzas()
     })
   }
-
+  newPizza(pizza){
+    return this.$http.post(
+      url,
+      pizza // ou pizza.json() si besoin
+    ).then(response => {      
+      return response.data
+    }) 
+  }
   getToppings () {
     if (this.toppings) {
       return this.$q.resolve(this.toppings)
@@ -92,6 +99,7 @@ export class PizzaService {
         })
     }
   }
+ 
 }
 
 PizzaService.$inject = ['$timeout', '$http', '$q']// on inject le timeout et le http

@@ -22,6 +22,7 @@ export class PizzaController {
         this.$location.path('/')
       })
   }
+  
 }
 
 PizzaController.$inject = ['PizzaService', '$routeParams', '$location']

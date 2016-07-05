@@ -4,14 +4,12 @@
       "id": 2,
       "name": "ma belle pizza avec des tops de ouf",
       "toppings": [
-        "eggs",
-        "ham",
         "tomato sauce",
-        "eggs",
-        "mushrooms",
-        "mushrooms",
         "mozzarella",
-        "mozzarella"
+        "mushrooms",
+        "ham",
+        "eggs",
+        "black olives"
       ],
       "status": 1
     },
@@ -28,11 +26,38 @@
       "status": 1
     },
     {
+      "id": 6,
       "name": 23,
       "toppings": [
-        "eggs"
+        "eggs",
+        "tomato sauce",
+        "tomato sauce"
       ],
-      "id": 6
+      "status": 1
+    },
+    {
+      "id": 11,
+      "name": "new pizza",
+      "toppings": [
+        "tomato sauce",
+        "mozzarella",
+        "mushrooms"
+      ]
+    },
+    {
+      "name": "new pizza",
+      "toppings": [],
+      "id": 12
+    },
+    {
+      "name": "new pizza",
+      "toppings": [],
+      "id": 13
+    },
+    {
+      "name": "new pizza",
+      "toppings": [],
+      "id": 14
     }
   ],
   "toppings": {
